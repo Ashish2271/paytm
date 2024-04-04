@@ -8,10 +8,10 @@ import { TextInput } from "@repo/ui/textinput";
 
 const SUPPORTED_BANKS = [{
     name: "HDFC Bank",
-    redirectUrl: "https://netbanking.hdfcbank.com"
+    redirectUrl: "http://localhost:3003"
 }, {
     name: "Axis Bank",
-    redirectUrl: "https://www.axisbank.com/"
+    redirectUrl: "http://localhost:3003"
 }];
 
 export const AddMoney = () => {
