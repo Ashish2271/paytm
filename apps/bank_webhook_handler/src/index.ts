@@ -1,12 +1,23 @@
 import express from "express";
 import db from "@repo/db/client";
+import cors from "cors"
+import cookieParser from 'cookie-parser'
+
+
+const corsOptions = {
+    origin: 'http://localhost:3000', // Replace this with your frontend application's origin
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  };
+
 const app = express();
+app.use(cookieParser());
 
 app.use(express.json())
-
+app.use(cors(corsOptions));
 app.post("/hdfcWebhook", async (req, res) => {
     //TODO: Add zod validation here?
     //TODO: HDFC bank should ideally send us a secret so we know this is sent by them
+
     const paymentInformation: {
         token: string;
         userId: string;
@@ -16,6 +27,7 @@ app.post("/hdfcWebhook", async (req, res) => {
         userId: req.body.user_identifier,
         amount: req.body.amount
     };
+    console.log(paymentInformation)
 
     try {
         await db.$transaction([
